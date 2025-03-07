@@ -83,8 +83,29 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
-
-
+  // filter/remove elements of a SLL that meet criteria
+  // criteria for removal provided by Comp functor object
+  // Comp provides an operator() that takes in an int
+  //      returns a bool 
+  // filtered/removed nodes should be deallocated
+  // recursive O(n)
+  if(head==nullptr) //BASE CASE: empty list
+  {
+    return nullptr;
+  }
+  // DO Recursion
+  Node* nextNode = llfilter(head->next, pred);
+  if(pred(head->val)) //if node satisfies the Comp condition - delete and call llfilter
+  {
+    delete head;
+    return nextNode;
+  }
+  else //if NOT move to the next node but keep current node and point to it in result 
+  {
+    head->next = nextNode;
+    return head;
+  }
+  //make sure to use delete to DEALLOCATE
 }
 
 #endif

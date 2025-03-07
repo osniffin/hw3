@@ -21,6 +21,15 @@ class Gate
 			char m_current_state;
 };
 
+class NotGate : public Gate
+{
+  public:
+  NotGate(Wire*, Wire*);
+  Event* update(uint64_t);
+};
+
+//Model the state change behavior to be the same as the And2Gate and Or2Gate
+
 class And2Gate : public Gate
 {
   public:

@@ -67,7 +67,15 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
+struct GreaterThEq 
+{
+    int val;
+    GreaterThEq(int n): val(n){}
+    bool operator()(int input)
+    {
+        return input>=val;
+    }
+};
 
 
 
@@ -86,9 +94,33 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
+    //test pivot 
+    Node* sm =nullptr;
+    Node* lg =nullptr;
+    int pivot =10;
+    llpivot(head, sm, lg, pivot);
+
+    cout <<"Sm: ";
+    print(sm);
+    cout << "Pivot: "<< pivot << endl;
+    cout <<"Lg: ";
+    print(lg);
+
+    //test pred
+    Node* headTest = readList(argv[1]);
+    cout << "Original list: ";
+    print(headTest);
+
+    GreaterThEq grThEq(pivot);
+    
+    Node* filteredList = llfilter(headTest, grThEq);
+    cout << "After filtering out values: ";
+    print(filteredList);
 
 
-
+    dealloc(sm);
+    dealloc(lg);
+    dealloc(filteredList);
     
     return 0;
 
